@@ -7,10 +7,10 @@ import 'package:productcase/home/presenter/providers/list_products_provider.dart
 
 import '../../data/repository/mocks/product_fake.dart';
 
-class ListProductsProviderControllerMock extends Mock implements IListProducts{}
+class ListProductsProviderControllerMock extends Mock implements IListProducts {
+}
 
-
-void main() {  
+void main() {
   final fake = ProductFake.fake;
   late final IListProducts controller;
   late final ListProductsProvider sut;
@@ -20,7 +20,7 @@ void main() {
     sut = ListProductsProvider(controller);
   });
 
-   test('Should call the controller correctly', () async {
+  test('Should call the controller correctly', () async {
     when(() => controller()).thenAnswer((_) async => right(fake));
     await sut.load();
     verify(() => controller()).called(1);
@@ -36,7 +36,9 @@ void main() {
     expect(sut.products.last == fake.last, isTrue);
   });
   test('Should throw an error message to view on failure', () async {
-    when(() => controller()).thenAnswer((_) async => left(''));
-    expect(() => sut.load(), throwsA(isA<String>()));
+    when(() => controller()).thenAnswer((_) async => left('error default'));
+    expect(sut.error, isEmpty);
+    await sut.load();
+    expect(sut.error, isNotEmpty);
   });
 }
