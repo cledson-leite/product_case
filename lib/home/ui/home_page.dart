@@ -21,13 +21,40 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Case'),
+        title: const Text(
+          'Product Case',
+          style: TextStyle(
+            fontFamily: 'Anton',
+            fontSize: 24,
+            wordSpacing: 10,
+            letterSpacing: 2
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Consumer<ListProductsProvider>(
         builder: (ctx, provider, _) {
           if (provider.error.isNotEmpty) {
             return Center(
-              child: Text(provider.error),
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                height: 150,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.red[600]!,
+                    ),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Center(
+                  child: Text(
+                    provider.error,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red[900]),
+                  ),
+                ),
+              ),
             );
           }
           if (provider.products.isNotEmpty) {

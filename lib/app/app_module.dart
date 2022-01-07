@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'app_widget.dart';
+import 'package:productcase/home/presenter/home_modular.dart';
 
 class AppModule extends Module {
     @override
@@ -8,7 +7,7 @@ class AppModule extends Module {
  
     @override
     final List<ModularRoute> routes = [
-      ChildRoute('/', child: (_, args) => Container()),
+      ModuleRoute('/', module: HomeModular()),
     ];
  
 }
