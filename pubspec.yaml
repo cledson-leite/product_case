@@ -38,6 +38,9 @@ dependencies:
   equatable: ^2.0.3
   dartz: ^0.10.1  
   dio: ^4.0.4
+  provider: ^6.0.2
+  mocktail_image_network: ^0.2.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
