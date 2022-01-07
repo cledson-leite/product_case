@@ -1,5 +1,5 @@
-import 'package:productcase/home/domain/entities/product.dart';
+import 'package:productcase/home/data/models/product_model.dart';
 
 abstract class IClient {
-  Future<List<Product>> list();
+  Future<List<ProductModel>> list();
 }
