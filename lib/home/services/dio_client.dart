@@ -6,7 +6,10 @@ import 'package:productcase/home/data/repository/error/list_product_exception.da
 class DioClient implements IClient {
   final Dio service;
 
-  DioClient(this.service);
+  DioClient(this.service) {
+    service.options.baseUrl =
+        'https://minha-loja-d150f-default-rtdb.firebaseio.com';
+  }
   @override
   Future<List<ProductModel>> list() async {
     try {
