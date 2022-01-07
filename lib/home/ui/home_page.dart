@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:productcase/home/presenter/providers/list_products_provider.dart';
 import 'package:productcase/home/ui/widgets/product_tile.dart';
 import 'package:provider/provider.dart';
@@ -20,15 +21,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
+        elevation: 0,
         title: const Text(
           'Product Case',
           style: TextStyle(
-            fontFamily: 'Anton',
-            fontSize: 24,
-            wordSpacing: 10,
-            letterSpacing: 2
-          ),
+              fontFamily: 'Anton',
+              fontSize: 24,
+              wordSpacing: 10,
+              letterSpacing: 2),
         ),
         centerTitle: true,
       ),

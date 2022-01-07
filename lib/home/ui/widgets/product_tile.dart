@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:productcase/home/domain/entities/product.dart';
+import 'package:productcase/home/ui/widgets/rating.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;
@@ -7,40 +8,81 @@ class ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.network(product.filename),
-        Text(product.title),
-        Text(product.type),
-        Text(product.createat),
-        Text(product.description),
-        Visibility(
-          visible: product.rating >= 1,
-          replacement: const Icon(Icons.star_outline),
-          child: const Icon(Icons.star),
-        ),
-        Visibility(
-          visible: product.rating >= 2,
-          replacement: const Icon(Icons.star_outline),
-          child: const Icon(Icons.star),
-        ),
-        Visibility(
-          visible: product.rating >= 3,
-          replacement: const Icon(Icons.star_outline),
-          child: const Icon(Icons.star),
-        ),
-        Visibility(
-          visible: product.rating >= 4,
-          replacement: const Icon(Icons.star_outline),
-          child: const Icon(Icons.star),
-        ),
-        Visibility(
-          visible: product.rating >= 5,
-          replacement: const Icon(Icons.star_outline),
-          child: const Icon(Icons.star),
-        ),
-        Text(product.price.toStringAsFixed(2)),
-      ],
+    return Card(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                product.filename,
+                fit: BoxFit.cover,
+                height: 170,
+                width: 100,
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 2,
+            child: SizedBox(
+              height: 170,
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    product.title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(product.type),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Text(product.createat),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    width: 200,
+                    child: Text(
+                      product.description,
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Rating(product.rating),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: Text(
+                          'R\$ ' + product.price.toStringAsFixed(2),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
