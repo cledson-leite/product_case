@@ -16,25 +16,27 @@ class ProductModel extends Product {
     required rating,
     required createat,
   }) : super(
-    id: id,
-    title: title,
-    type: type,
-    description: description,
+          id: id,
+          title: title,
+          type: type,
+          description: description,
           filename: filename,
-    height: height,
-    width: width,
-    price: price,
-    rating: rating,
+          height: height,
+          width: width,
+          price: price,
+          rating: rating,
           createat: createat,
-  );
+        );
 
   factory ProductModel.fromMap(Map<String, dynamic> map, String? id) {
+    final String imageUrl =
+        'https://firebasestorage.googleapis.com/v0/b/minha-loja-d150f.appspot.com/o/${map['filename']}?alt=media';
     return ProductModel(
       id: id ?? '',
       title: map['title'] ?? '',
       type: map['type'] ?? '',
       description: map['description'] ?? '',
-      filename: map['filename'] ?? '',
+      filename: imageUrl ,
       height: map['height']?.toInt() ?? 0,
       width: map['width']?.toInt() ?? 0,
       price: map['price']?.toDouble() ?? 0.0,
