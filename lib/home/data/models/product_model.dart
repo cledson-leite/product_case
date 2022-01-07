@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
 import 'package:productcase/home/domain/entities/product.dart';
 
 class ProductModel extends Product {
@@ -8,21 +9,23 @@ class ProductModel extends Product {
     required title,
     required type,
     required description,
-    required imageUrl,
+    required filename,
     required height,
     required width,
     required price,
     required rating,
+    required createat,
   }) : super(
     id: id,
     title: title,
     type: type,
     description: description,
-    imageUrl: imageUrl,
+          filename: filename,
     height: height,
     width: width,
     price: price,
     rating: rating,
+          createat: createat,
   );
 
   factory ProductModel.fromMap(Map<String, dynamic> map, String? id) {
@@ -31,11 +34,12 @@ class ProductModel extends Product {
       title: map['title'] ?? '',
       type: map['type'] ?? '',
       description: map['description'] ?? '',
-      imageUrl: map['imageUrl'] ?? '',
+      filename: map['filename'] ?? '',
       height: map['height']?.toInt() ?? 0,
       width: map['width']?.toInt() ?? 0,
       price: map['price']?.toDouble() ?? 0.0,
       rating: map['rating']?.toInt() ?? 0,
+      createat: DateFormat('dd/MM/yyyy').format(DateTime.now()),
     );
   }
 }

@@ -8,7 +8,7 @@ class ProductFake {
       'title': "Brown eggs",
       'type': "dairy",
       'description': "Raw organic brown eggs in a basket",
-      'imageUrl': "0.jpg",
+      'filename': "0.jpg",
       'height': 600,
       'width': 400,
       'price': 28.1,
