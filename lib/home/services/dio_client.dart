@@ -14,6 +14,7 @@ class DioClient implements IClient {
   Future<List<ProductModel>> list() async {
     try {
       final result = await service.get('/products.json');
+
       final List<ProductModel> models = [];
       if (result.data == null) return models;
       result.data.forEach((key, value) {

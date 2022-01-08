@@ -7,6 +7,14 @@ class UpdateProductProvider extends ChangeNotifier {
   UpdateProductProvider(this.controller);
   bool update = false;
   String error = '';
+  
+  int _rating = 0;
+
+  int get rating => _rating;
+  set rating(int value){
+    _rating = value;
+    notifyListeners();
+  }
 
   Future<void> put(String id, Map<String, dynamic> body) async {
     final result = await controller(id, body);

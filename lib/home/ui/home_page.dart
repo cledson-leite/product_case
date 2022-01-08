@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:productcase/home/presenter/providers/list_products_provider.dart';
 import 'package:productcase/home/ui/widgets/product_tile.dart';
 import 'package:provider/provider.dart';
@@ -43,17 +42,18 @@ class _HomePageState extends State<HomePage> {
                 height: 150,
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.red[600]!,
+                      color: Colors.white,
                     ),
                     borderRadius: BorderRadius.circular(8)),
                 child: Center(
                   child: Text(
                     provider.error,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red[900]),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

@@ -23,7 +23,7 @@ class ProductManagerModular extends Module {
       '/',
       child: (_, args) => ChangeNotifierProvider(
         create: (_) => Modular.get<UpdateProductProvider>(),
-        child: ProductManagerPage(args.data),
+        child: ProductManagerPage(args.data['id'], args.data['body']),
       ),
     ),
   ];

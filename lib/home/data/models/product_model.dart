@@ -10,8 +10,6 @@ class ProductModel extends Product {
     required type,
     required description,
     required filename,
-    required height,
-    required width,
     required price,
     required rating,
     required createat,
@@ -21,8 +19,6 @@ class ProductModel extends Product {
           type: type,
           description: description,
           filename: filename,
-          height: height,
-          width: width,
           price: price,
           rating: rating,
           createat: createat,
@@ -31,18 +27,17 @@ class ProductModel extends Product {
   factory ProductModel.fromMap(Map<String, dynamic> map, String? id) {
     final String imageUrl =
         'https://firebasestorage.googleapis.com/v0/b/minha-loja-d150f.appspot.com/o/${map['filename']}?alt=media';
+    final String filename = map['filename'];
+    final String url = filename.endsWith('jpg') ? imageUrl : map['filename'];
     return ProductModel(
-      id: id ?? '',
+      id: id,
       title: map['title'] ?? '',
       type: map['type'] ?? '',
       description: map['description'] ?? '',
-      filename: imageUrl ,
-      height: map['height']?.toInt() ?? 0,
-      width: map['width']?.toInt() ?? 0,
-      price: map['price']?.toDouble() ?? 0.0,
-      rating: map['rating']?.toInt() ?? 0,
-      createat: map['createat'] ??
-          DateFormat('dd/MM/yyyy').format(DateTime.now()),
+      filename: url,
+      price: map['price'],
+      rating: map['rating'],
+      createat: map['createat'] ?? DateFormat('dd/MM/yyyy').format(DateTime.now()),
     );
   }
 }
