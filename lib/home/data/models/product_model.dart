@@ -41,7 +41,8 @@ class ProductModel extends Product {
       width: map['width']?.toInt() ?? 0,
       price: map['price']?.toDouble() ?? 0.0,
       rating: map['rating']?.toInt() ?? 0,
-      createat: DateFormat('dd/MM/yyyy').format(DateTime.now()),
+      createat: map['createat'] ??
+          DateFormat('dd/MM/yyyy').format(DateTime.now()),
     );
   }
 }

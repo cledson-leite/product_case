@@ -13,7 +13,7 @@ class UpdateProduct implements IUpdateProduct {
   Future<Either<String, bool>> call(
       String id, Map<String, dynamic> body) async {
      try {
-      final result = await datasource.list();
+      final result = await datasource.list(id, body);
       return right(result);
     } catch (_) {
       return left(NotFoundException().message);
