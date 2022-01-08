@@ -24,14 +24,14 @@ void main() {
     reset(datasource);
   });
   test('Should call the datasource correctly', () async {
-    when(() => datasource.list()).thenAnswer((_) async => true);
+    when(() => datasource.list(id, body)).thenAnswer((_) async => true);
 
     await sut(id, body);
 
-    verify(() => datasource.list()).called(1);
+    verify(() => datasource.list(id, body)).called(1);
   });
   test('Should return a list product entity on success', () async {
-    when(() => datasource.list()).thenAnswer((_) async => true);
+    when(() => datasource.list(id, body)).thenAnswer((_) async => true);
 
     final result = await sut(id, body);
 
@@ -39,7 +39,7 @@ void main() {
     expect(result.fold((l) => l, (r) => r), isTrue);
   });
   test('Should returns NotFoundException error message on failure', () async {
-    when(() => datasource.list()).thenThrow(Error());
+    when(() => datasource.list(id, body)).thenThrow(Error());
 
     final result = await sut(id, body);
 
