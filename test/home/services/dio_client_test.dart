@@ -8,6 +8,7 @@ import 'package:productcase/home/services/dio_client.dart';
 import 'mocks/api_response_fake.dart';
 
 void main() {
+  const String id = '1';
   final response = ApiResponseFake.response;
   late final Dio dio;
   late final DioAdapter service;
@@ -50,5 +51,32 @@ void main() {
       ),
     );
     expect(() async => await sut.list(), throwsA(isA<UnexpectedException>()));
+  });
+  test('Should return a true on success', () async {
+    service.onDelete('/products/$id.json', (server) => server.reply(200, true));
+    await dio.delete('/products/$id.json');
+    final result = await sut.delete(id);
+    expect(result, isA<bool>());
+    expect(result, isTrue);
+  });
+  test('Should return false on emput return', () async {
+    service.onDelete('/products/$id.json', (server) => server.reply(200, null));
+    await dio.delete('/products/$id.json');
+    final result = await sut.delete(id);
+    expect(result, isFalse);
+  });
+  test('Should return error on failure', () async {
+    service.onDelete(
+      '/products/$id.json',
+      (server) => server.throws(
+        404,
+        DioError(
+          requestOptions: RequestOptions(
+            path: '/products/$id.json',
+          ),
+        ),
+      ),
+    );
+    expect(() async => await sut.delete(id), throwsA(isA<UnexpectedException>()));
   });
 }
