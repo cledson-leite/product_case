@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:productcase/edit/presenter/product_manager_modular.dart';
-import 'package:productcase/edit/ui/product_manager_page.dart';
+import 'package:productcase/home/data/repository/remove_product.dart';
 import 'package:productcase/home/domain/entities/product.dart';
+import 'package:productcase/home/presenter/providers/remove_products_provider.dart';
 import 'package:productcase/home/ui/widgets/rating.dart';
+import 'package:provider/provider.dart';
 
 // import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -13,6 +14,34 @@ class ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _remove() {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text(''),
+          content: const Text(''),
+          actions: [
+            Consumer<RemoveProductProvider>(builder: (context, provider, _) {
+              return TextButton(
+                  onPressed: () {
+                    provider.remove(product.id);
+                    Modular.to.pushReplacementNamed('/');
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Product deleted successfully'),
+                    ));
+                  },
+                  child: const Text('Confirm'));
+            }),
+            TextButton(
+                onPressed: () {
+                  Modular.to.navigate('/');
+                },
+                child: const Text('Cancel')),
+          ],
+        ),
+      );
+    }
+
     final Map<String, dynamic> body = {
       'title': product.title,
       'type': product.type,
@@ -22,9 +51,6 @@ class ProductTile extends StatelessWidget {
       'rating': product.rating,
     };
     return GestureDetector(
-      onTap: () {
-        Modular.to.pushNamed('/update/', arguments: {'id': product.id, 'body': body});
-      },
       child: Card(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -46,15 +72,33 @@ class ProductTile extends StatelessWidget {
               child: SizedBox(
                 height: 170,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      product.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          product.title,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        PopupMenuButton(
+                          itemBuilder: (_) => [
+                            PopupMenuItem(
+                                child: IconButton(
+                                    onPressed: () {
+                                      Modular.to.pushNamed('/update/',
+                                          arguments: body);
+                                    },
+                                    icon: const Icon(Icons.edit))),
+                            PopupMenuItem(
+                                child: IconButton(
+                                    onPressed: _remove,
+                                    icon: const Icon(Icons.delete))),
+                          ],
+                        )
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
