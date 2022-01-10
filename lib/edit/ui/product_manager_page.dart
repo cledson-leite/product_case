@@ -18,9 +18,11 @@ class ProductManagerPage extends StatelessWidget {
           title: const Text('Manager Product',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ))),
+                fontFamily: 'Anton',
+                fontSize: 24,
+                wordSpacing: 10,
+                letterSpacing: 2),
+          ),),
       body: Container(
         padding: const EdgeInsets.all(15),
         margin: const EdgeInsets.only(top: 10),
