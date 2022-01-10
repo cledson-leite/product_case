@@ -5,6 +5,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:productcase/home/domain/entities/product.dart';
 import 'package:productcase/home/domain/usecases/i_list_product.dart';
+import 'package:productcase/home/domain/usecases/i_remove_product.dart';
 import 'package:productcase/home/presenter/providers/list_products_provider.dart';
 import 'package:productcase/home/ui/home_page.dart';
 import 'package:productcase/home/ui/widgets/product_tile.dart';
@@ -44,7 +45,8 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 1));
     expect(find.text('Error default'), findsOneWidget);
   });
-  testWidgets('Should show a tile view list of products on success', (tester) async {
+  testWidgets('Should show a tile view list of products on success',
+      (tester) async {
     await mockNetworkImages(() async {
       when(() => controller()).thenAnswer((_) async => right(fake));
       await _initializerTester(tester);
@@ -52,9 +54,11 @@ void main() {
       final BuildContext context = tester.element(find.byType(HomePage));
       Provider.of<ListProductsProvider>(context, listen: false).load();
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      final products = Provider.of<ListProductsProvider>(context, listen: false).products;
+      final products =
+          Provider.of<ListProductsProvider>(context, listen: false).products;
       expect(find.byType(ListView), findsOneWidget);
       expect(find.byType(ProductTile), findsNWidgets(products.length));
     });
   });
+  
 }
