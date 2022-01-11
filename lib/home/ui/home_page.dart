@@ -16,7 +16,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     Provider.of<ListProductsProvider>(context, listen: false).load();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

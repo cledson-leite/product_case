@@ -19,7 +19,7 @@ class HomeModular extends Module {
     Bind.factory((i) => ListProduct(i())),
     Bind.factory((i) => ListProductController(i())),
     Bind.factory((i) => ListProductsProvider(i())),
-    Bind.factory((i) => RemoveProduct(i<DioClient>())),
+    Bind.factory((i) => RemoveProduct(i())),
     Bind.factory((i) => RemoveProductController(i())),
     Bind.factory((i) => RemoveProductProvider(i()))
   ];
