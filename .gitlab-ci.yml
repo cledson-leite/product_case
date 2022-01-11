@@ -1,0 +1,12 @@
+test:
+script:
+  - flutter pub get
+  - flutter test
+
+build:
+script:
+  - flutter pub get
+  - flutter clean
+  - flutter build apk
+  path:
+    -build/app/bundle/release/app-release.apk
