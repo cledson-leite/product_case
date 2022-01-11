@@ -8,6 +8,6 @@ build:
   - flutter pub get
   - flutter clean
   - flutter build apk
-  artifacts:
+ artifacts:
     paths:
-      -build/app/bundle/release/app-release.apk
+      - $CI_PROJECT_DIR/build/app/bundle/release/app-release.apk
